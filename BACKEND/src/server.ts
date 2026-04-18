@@ -8,6 +8,7 @@ import authRoutes from './routes/auth'
 const app = express()
 const isProduction = env.nodeEnv === 'production'
 
+
 if (isProduction) {
   app.set('trust proxy', 1)
 }
