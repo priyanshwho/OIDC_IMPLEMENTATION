@@ -6,8 +6,9 @@ import { env } from './config/env'
 import authRoutes from './routes/auth'
 
 const app = express()
+const isProduction = env.nodeEnv === 'production'
 
-if (env.nodeEnv === 'production') {
+if (isProduction) {
   app.set('trust proxy', 1)
 }
 
@@ -29,8 +30,8 @@ app.use(
     saveUninitialized: false,
     cookie: {
       httpOnly: true,
-      secure: env.nodeEnv === 'production',
-      sameSite: 'lax',
+      secure: isProduction,
+      sameSite: isProduction ? 'none' : 'lax',
       maxAge: 1000 * 60 * 60 * 8,
     },
   }),
